@@ -1,0 +1,629 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High-Tech Coding Bootcamp</title>
+    <style>
+        /* General Styles */
+        :root {
+            --electric-blue: #00FFFF;
+            --neon-purple: #9400D3;
+            --soft-gray: #2E2E2E;
+            --vibrant-orange: #FF4500;
+            --lime-green: #32CD32;
+            --hot-pink: #FF69B4;
+            --white: #FFFFFF;
+            --black: #000000;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--black);
+            color: var(--white);
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        body.light-mode {
+            background-color: var(--white);
+            color: var(--black);
+        }
+
+        .container {
+            width: 85%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: var(--soft-gray);
+            color: var(--white);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: var(--electric-blue);
+            color: var(--black);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1620712943543-bcc468804482?q=80&w=1972&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover no-repeat;
+            color: var(--white);
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+            height: 500px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--electric-blue);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Chatbot Widget */
+        .chatbot-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--neon-purple);
+            color: var(--white);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .chatbot-widget:hover {
+            transform: scale(1.1);
+        }
+
+        /* Courses Section */
+        .courses-section {
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .course-filters {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            background-color: var(--soft-gray);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--electric-blue);
+            color: var(--black);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .course-card {
+            background-color: var(--soft-gray);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-card video {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .course-card-content {
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .course-card h3 {
+            color: var(--electric-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .course-card p {
+            margin-bottom: 1rem;
+        }
+
+        .learn-more-btn {
+            background-color: var(--vibrant-orange);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .learn-more-btn:hover {
+            background-color: var(--hot-pink);
+        }
+
+        /* Course Detail Page */
+        .course-detail {
+            padding: 2rem;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .course-video {
+            flex: 1;
+        }
+
+        .course-video video {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .course-info {
+            flex: 1;
+        }
+
+        .syllabus-section h2, .instructor-section h2 {
+            color: var(--electric-blue);
+            margin-bottom: 1rem;
+        }
+
+        .syllabus-item {
+            background-color: var(--soft-gray);
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .syllabus-item:hover {
+            background-color: var(--electric-blue);
+            color: var(--black);
+        }
+
+        .instructor-bio {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .instructor-bio img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .progress-tracker {
+            margin-top: 2rem;
+        }
+
+        .progress-bar {
+            background-color: var(--soft-gray);
+            height: 20px;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background-color: var(--lime-green);
+            width: 0;
+            transition: width 0.5s ease;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .testimonial-card {
+            background-color: var(--soft-gray);
+            padding: 1rem;
+            margin: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .testimonial-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .star-rating {
+            color: var(--vibrant-orange);
+        }
+
+        /* Registration Page */
+        .registration-section {
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .registration-form {
+            background-color: var(--soft-gray);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            margin: auto;
+        }
+
+        .registration-form input, .registration-form button {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .registration-form button {
+            background-color: var(--vibrant-orange);
+            color: var(--white);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .registration-form button:hover {
+            background-color: var(--hot-pink);
+        }
+
+        .countdown-timer {
+            color: var(--lime-green);
+            margin-top: 1rem;
+        }
+
+        /* Live Coding Playground */
+        .playground-section {
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .coding-interface {
+            background-color: var(--soft-gray);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            max-width: 800px;
+            margin: auto;
+        }
+
+        /* Job Placement Tracker */
+        .job-tracker-section {
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .partner-logos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .partner-logo {
+            width: 150px;
+            height: auto;
+            filter: grayscale(100%);
+            transition: filter 0.3s;
+        }
+
+        .partner-logo:hover {
+            filter: grayscale(0%);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--soft-gray);
+            color: var(--white);
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .footer a {
+            color: var(--electric-blue);
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Accessibility & Responsiveness */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+
+            .course-detail {
+                flex-direction: column;
+            }
+        }
+
+        /* Mode Toggle */
+        .mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--soft-gray);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1001;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .mode-toggle:hover {
+            background-color: var(--electric-blue);
+            color: var(--black);
+        }
+    </style>
+</head>
+<body>
+    <!-- Mode Toggle Button -->
+    <button class="mode-toggle" onclick="toggleMode()">Toggle Mode</button>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="#home">Home</a>
+        <a href="#courses">Courses</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#playground">Playground</a>
+        <a href="#job-tracker">Job Tracker</a>
+        <a href="#register">Register</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Unlock Your Potential with AI-Powered Learning</h1>
+            <p>Join our high-tech coding bootcamp and transform your career.</p>
+            <!-- AI Chatbot Widget -->
+            <div class="chatbot-widget" onclick="openChatbot()">
+                🤖
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="courses-section">
+        <div class="container">
+            <h2>Explore Our Courses</h2>
+            <div class="course-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="beginner">Beginner</button>
+                <button class="filter-btn" data-filter="intermediate">Intermediate</button>
+                <button class="filter-btn" data-filter="advanced">Advanced</button>
+                <button class="filter-btn" data-filter="full-stack">Full Stack</button>
+                <button class="filter-btn" data-filter="ai">AI</button>
+                <button class="filter-btn" data-filter="cybersecurity">Cybersecurity</button>
+            </div>
+            <div class="courses-grid">
+                <!-- Course Card Example -->
+                <div class="course-card" data-category="beginner full-stack">
+                    <video src="https://www.freepik.com/free-video/computer-screen-with-html-code-close-up_10388909.htm#query=coding&position=7&from_view=search&track=sph&uuid=65d9959a-9993-45a6-958f-7e9f6b7f4b5d" autoplay muted loop></video>
+                    <div class="course-card-content">
+                        <h3>Full Stack Development for Beginners</h3>
+                        <p>Learn the basics of web development and build your first full-stack application.</p>
+                        <a href="#course-detail" class="learn-more-btn">Learn More</a>
+                    </div>
+                </div>
+                <div class="course-card" data-category="beginner full-stack">
+                    <video src="https://www.freepik.com/free-video/computer-screen-with-html-code-close-up_10388909.htm#query=coding&position=7&from_view=search&track=sph&uuid=65d9959a-9993-45a6-958f-7e9f6b7f4b5d" autoplay muted loop></video>
+                    <div class="course-card-content">
+                        <h3>Full Stack Development for Beginners</h3>
+                        <p>Learn the basics of web development and build your first full-stack application.</p>
+                        <a href="#course-detail" class="learn-more-btn">Learn More</a>
+                    </div>
+                </div>
+                <div class="course-card" data-category="beginner full-stack">
+                    <video src="https://www.freepik.com/free-video/computer-screen-with-html-code-close-up_10388909.htm#query=coding&position=7&from_view=search&track=sph&uuid=65d9959a-9993-45a6-958f-7e9f6b7f4b5d" autoplay muted loop></video>
+                    <div class="course-card-content">
+                        <h3>Full Stack Development for Beginners</h3>
+                        <p>Learn the basics of web development and build your first full-stack application.</p>
+                        <a href="#course-detail" class="learn-more-btn">Learn More</a>
+                    </div>
+                </div>
+                <!-- Add more course cards here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Detail Section -->
+    <section id="course-detail" class="course-detail">
+        <div class="course-video">
+            <video src="https://www.freepik.com/free-video/computer-screen-with-html-code-close-up_10388909.htm#query=coding&position=7&from_view=search&track=sph&uuid=65d9959a-9993-45a6-958f-7e9f6b7f4b5d" controls></video>
+        </div>
+        <div class="course-info">
+            <div class="syllabus-section">
+                <h2>Syllabus</h2>
+                <div class="syllabus-item">Module 1: Introduction to Web Development</div>
+                <div class="syllabus-item">Module 2: HTML & CSS Basics</div>
+                <!-- Add more syllabus items here -->
+            </div>
+            <div class="instructor-section">
+                <h2>Instructor</h2>
+                <div class="instructor-bio">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Instructor Photo">
+                    <div>
+                        <h3>John Doe</h3>
+                        <p>Experienced Full Stack Developer with 10+ years in the industry.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="progress-tracker">
+                <h2>Your Progress</h2>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" style="width: 0%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <h2>Student Testimonials</h2>
+            <div class="testimonial-card">
+                <p>"This bootcamp changed my life! I went from zero coding knowledge to landing my dream job."</p>
+                <div class="star-rating">★★★★★</div>
+            </div>
+            <!-- Add more testimonial cards here -->
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="register" class="registration-section">
+        <div class="container">
+            <h2>Register Now</h2>
+            <form class="registration-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <button type="submit">Sign Up</button>
+                <div class="countdown-timer">Early Bird Discount Ends In: <span id="countdown"></span></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Live Coding Playground -->
+    <section id="playground" class="playground-section">
+        <div class="container">
+            <h2>Live Coding Playground</h2>
+            <div class="coding-interface">
+                {/* Placeholder for coding interface */}
+                <p>Coding interface will be integrated here.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Job Placement Tracker -->
+    <section id="job-tracker" class="job-tracker-section">
+        <div class="container">
+            <h2>Job Placement Partners</h2>
+            <div class="partner-logos">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Partner Logo" class="partner-logo">
+                {/* Add more partner logos here */}
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <p>&copy; 2024 High-Tech Coding Bootcamp. All rights reserved.</p>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script>
+        // Mode Toggle Function
+        function toggleMode() {
+            const body = document.body;
+            body.classList.toggle('light-mode');
+        }
+
+        // Course Filter Function
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const courseCards = document.querySelectorAll('.course-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filter = button.dataset.filter;
+
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    courseCards.forEach(card => {
+                        if (filter === 'all' || card.dataset.category.includes(filter)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+
+        // Countdown Timer Function
+        function startCountdown() {
+            const countdownDate = new Date("Jan 5, 2025 15:37:25").getTime();
+
+            const x = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = countdownDate - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+                + minutes + "m " + seconds + "s ";
+
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("countdown").innerHTML = "EXPIRED";
+                }
+            }, 1000);
+        }
+
+        startCountdown();
+
+        // Chatbot Function (Placeholder)
+        function openChatbot() {
+            alert('Chatbot functionality will be implemented here.');
+        }
+    </script>
+</body>
+</html>
